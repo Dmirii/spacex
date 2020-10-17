@@ -60,21 +60,17 @@ updateCompany = () => {
             { this.state.company && <Home company={this.state.company}/> }
         </Route>
 
+        {/* способ вызова  */}
         <Route path='/rocket'>
             <Main {...this.state}/>
             { this.state.rocketFeatures && <Features {...this.state.rocketFeatures}/> }
         </Route>
 
-        <Route path='/calendar'>
-          {/* <Main title='Календарь SpaceX' /> */}
-          <Calendar />
-        </Route>
-
-        <Route path='/details'>
-          {/* <Main title='Детали SpaceX' /> */}
-          <Detailes />
-        </Route>
-      
+        {/* способ вызова  */}
+        <Route path='/calendar' component={Calendar}/> 
+        
+        <Route path='/details/:id'component={Detailes}/> 
+        
         
 
         { this.state.company && <Footer {...this.state.company.links}/> }

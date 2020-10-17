@@ -51,7 +51,7 @@ const Features = ({
                     
                     </thead>
                 </table>
-                <RelaxWrapper speed={14}>rocketsImages
+                <RelaxWrapper speed={14}>
                     <img
                             src={rocketsImages.hasOwnProperty(name) 
                                 ? rocketsImages[name] 
