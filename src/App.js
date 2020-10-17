@@ -1,13 +1,15 @@
 import React from 'react';
+import {BrowserRouter , Route} from 'react-router-dom';
 
 import './style.css';
 import Header from './components/header/Header.js';
+import Home from './components/Home/Home.js';
 import Main from './components/Main/Main';
 import Features from './components/features/features';
 import Footer from './components/Footer/Footer';
 import FetchData from './service/FetchData';
-// import Calendar from './components/Calendar/Calendar';
-// import Detailes from './components/Detailes/Detailes';
+import Calendar from './components/Calendar/Calendar';
+import Detailes from './components/Detailes/Detailes';
 
 
 class App extends React.Component{
@@ -18,9 +20,12 @@ class App extends React.Component{
     rocket: 'Falcon 1',
     rocketFeatures:null,
     rockets:[],
+    company: null,
   }
   componentDidMount(){
+    // метод жизненного цикла до рендера
     this.updateRocket();
+    this.updateCompany();
   
   }
 
@@ -33,24 +38,48 @@ class App extends React.Component{
     .then( data => data.find(item => item.name === this.state.rocket))
     .then(rocketFeatures => {
     this.setState( {rocketFeatures}  , () => { 
-      console.log('>>>>',this.state)
+      //console.log('upRocket:',this.state)
       })    
     })
 }
 
 changeRocket = rocket =>{
-  this.setState({ rocket}, this.updateRocket)
-  
+  this.setState({ rocket}, this.updateRocket)  
 }
+
+updateCompany = () => {
+  this.fetchData.getCompany()
+    .then( company =>  this.setState({company : company}, ()=> console.log('State',this.state)))
+};
   
   render (){
     return (  
-      <>
+      <BrowserRouter>
         <Header rockets = {this.state.rockets} changeRocket={this.changeRocket} />
-        <Main {...this.state}/>
-        <Features {...this.state.rocketFeatures}/> 
-        <Footer/>  
-      </>
+        <Route exact path='/'>
+            { this.state.company && <Home company={this.state.company}/> }
+        </Route>
+
+        <Route path='/rocket'>
+            <Main {...this.state}/>
+            { this.state.rocketFeatures && <Features {...this.state.rocketFeatures}/> }
+        </Route>
+
+        <Route path='/calendar'>
+          {/* <Main title='Календарь SpaceX' /> */}
+          <Calendar />
+        </Route>
+
+        <Route path='/details'>
+          {/* <Main title='Детали SpaceX' /> */}
+          <Detailes />
+        </Route>
+      
+        
+
+        { this.state.company && <Footer {...this.state.company.links}/> }
+        
+      </BrowserRouter>
     )
   }
 }

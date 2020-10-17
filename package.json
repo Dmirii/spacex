@@ -2,7 +2,7 @@
   "name": "spacex",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://dmirii.github.io/spacex/",
+  "homepage": "https://dmirii.github.io/spacex/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -11,15 +11,15 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-rellax-wrapper": "^1.0.5",
-    "react-scripts": "3.4.3",
-    "predeploy":"yarn build",
-    "deploy":"gh-pages -d build"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-router-dom": "^5.2.0"
   }
 }
